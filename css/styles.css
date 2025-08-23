@@ -1,8 +1,329 @@
-/* SCSS principal pour duckhunt */
+:root body {
+  --color-primary: #202123;
+  --color-secondary: #ff549d;
+  --color-tertiary: #ffbc6f;
+  --color-gray-900: #3a3a3a;
+  --color-gray-800: #727272;
+  --color-gray-700: #9f9fa0;
+  --color-gray-600: #d5d6d9;
+  --color-gray-500: #efeff2;
+  --color-gray-400: #f7f7f7;
+  --color-gray-300: #fafafa;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  /* Color theme dependant colors */
+  --color-primary-theme: #202123;
+  --color-bg-100-theme: #fafafa;
+  --color-bg-200-theme: #f7f7f7;
+  --color-bg-300-theme: #d5d6d9;
+}
+:root body.darkmode {
+  /* Color theme dependant colors */
+  --color-primary-theme: #f7f7f7;
+  --color-bg-100-theme: #343538;
+  --color-bg-200-theme: #727272;
+  --color-bg-300-theme: #9f9fa0;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 body {
-  font-family: sans-serif;
-  background: #fafafa;
-  color: #333;
+  font-family: "Montserrat";
+}
+
+.dh_game {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  width: 100%;
+  background-color: #61aaf8;
+  cursor: none;
+  height: 100vh;
+}
+.dh_game:only-child {
+  overflow: hidden;
+}
+.dh_game::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 150px;
+  width: 100%;
+  background-color: #2cc91e;
+  border-top: 20px solid #61aaf8;
+  box-shadow: 0 -30px 0 #2cc91e;
+  content: "";
+}
+.dh_game::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 120px;
+  width: 100%;
+  background-color: #fff;
+  opacity: 0.2;
+  content: "";
+}
+.dh_game__name {
+  position: absolute;
+  text-align: center;
+  font-weight: 800;
+  color: #fff;
+  top: 50%;
+  opacity: 0.1;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15vw;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.dh_game__name.flash-win {
+  animation: dh_game__nameFlash 0.5s infinite;
+}
+.dh_game__name.flash-bullet {
+  animation: dh_game__nameFlashFull 0.5s infinite;
+  color: rgba(223, 242, 10, 0.5843137255);
+}
+.dh_game__name.flash-lose {
+  animation: dh_game__nameFlash 0.5s infinite;
+  color: red;
+}
+.dh_game__duck {
+  position: absolute;
+  z-index: 10;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 150px;
+  height: 150px;
+  background-image: url("../assets/duck_01.png");
+  animation: dh_game__duck 300ms infinite;
+  transition: background 0.75s, opacity 0.7s;
+}
+.dh_game__duck--dead {
+  animation: none;
+  background-image: url("../assets/duck_dead.png");
+  transform: translateY(100px);
+  transition: all 0.7s;
+}
+.dh_game__duck--flipped {
+  transform: scaleX(-1);
+}
+.dh_game__duck--flipped.dh_game__duck--dead {
+  transform: scaleX(-1) translateY(100px);
+  transition: all 0.7s;
+}
+.dh_game__duck--faded {
+  opacity: 0;
+}
+.dh_game__aim {
+  pointer-events: none;
+  position: absolute;
+  z-index: 20;
+  display: block;
+  border-radius: 9999px;
+  border: 2px solid #000;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+}
+.dh_game__aim::before {
+  position: absolute;
+  display: block;
+  background-color: #000;
+  content: "";
+  width: 75px;
+  height: 2px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.dh_game__aim::after {
+  position: absolute;
+  display: block;
+  background-color: #000;
+  content: "";
+  width: 75px;
+  height: 2px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.dh_game__mainScore {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  color: #fff;
+}
+.dh_game__bullets {
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+}
+.dh_game__bullets .bullet {
+  margin-left: 0.75rem;
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 9999px;
+  background-color: #fff;
+}
+
+.dh_gameover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  background-color: #61aaf8;
+  height: 100vh;
+}
+.dh_gameover:only-child {
+  overflow: hidden;
+}
+.dh_gameover::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 150px;
+  width: 100%;
+  background-color: #2cc91e;
+  border-top: 20px solid #61aaf8;
+  box-shadow: 0 -30px 0 #2cc91e;
+  content: "";
+}
+.dh_gameover::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 120px;
+  width: 100%;
+  background-color: #fff;
+  opacity: 0.2;
+  content: "";
+}
+.dh_gameover__content {
+  position: absolute;
+  text-align: center;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.dh_gameover__content h1 {
+  font-size: 5vw;
+  font-weight: 800;
+  color: #fff;
+}
+.dh_gameover__endScoreContainer {
+  margin-bottom: 1rem;
+  font-size: 2vw;
+  font-weight: 800;
+  color: #fff;
+}
+.dh_gameover__button {
+  margin-top: 1rem;
+  display: inline-block;
+  border-radius: 0.375rem;
+  background-color: #2cc91e;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  transition-duration: 200ms;
+  transition-property: background-color, color;
+}
+.dh_gameover__button:hover {
+  background-color: #fff;
+  color: #2cc91e;
+}
+.dh_gameover__dog {
+  position: absolute;
+  height: 320px;
+  width: 250px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("../assets/dog.png");
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
+  animation: dh_gameover__dog 300ms infinite;
+}
+
+@keyframes dh_game__duck {
+  0% {
+    background-image: url("../assets/duck_01.png");
+  }
+  50% {
+    background-image: url("../assets/duck_02.png");
+  }
+  100% {
+    background-image: url("../assets/duck_01.png");
+  }
+}
+@keyframes dh_game__nameFlash {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+@keyframes dh_game__nameFlashFull {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+@keyframes dh_gameover__dog {
+  0% {
+    background-image: url("../assets/dog.png");
+  }
+  50% {
+    background-image: url("../assets/dog_02.png");
+  }
+  100% {
+    background-image: url("../assets/dog.png");
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

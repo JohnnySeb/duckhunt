@@ -1,7 +1,3 @@
-/* SCSS principal pour duckhunt */
-
-body {
-  font-family: sans-serif;
-  background: #fafafa;
-  color: #333;
-}
+@use "root-variables" as *;
+@use "fontfaces" as *;
+@use "duckhunt.scss" as *;
