@@ -1,4 +1,4 @@
-# duckhunt
+# Duck Hunt
 
 Projet simple avec SCSS compilé via `npm run sass`.
 
