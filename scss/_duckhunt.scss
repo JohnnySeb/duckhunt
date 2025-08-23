@@ -38,7 +38,7 @@
     &__name {
         position: absolute;
         text-align: center;
-        font-weight: 800;
+        font-weight: bold;
         color: #fff;
         top: 50%;
         opacity: 0.1;
@@ -201,14 +201,14 @@
 
         h1 {
             font-size: 5vw;
-            font-weight: 800;
+            font-weight: bold;
             color: #fff;
         }
     }
     &__endScoreContainer {
         margin-bottom: 1rem;
         font-size: 2vw;
-        font-weight: 800;
+        font-weight: bold;
         color: #fff;
     }
     &__button {
