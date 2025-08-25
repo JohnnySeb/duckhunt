@@ -81,6 +81,7 @@
             background-image: url('../assets/duck_dead.png');
             transform: translateY(100px);
             transition: all 0.7s;
+            pointer-events: none;
         }
 
         &--flipped {
